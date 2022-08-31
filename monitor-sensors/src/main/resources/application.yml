@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+database:
+  host: ${POSTGRES_HOST:localhost}
+  port: ${POSTGRES_PORT:5432}
+  username: ${POSTGRES_USERNAME:user}
+  password: ${POSTGRES_PASSWORD:password}
+  database: ${POSTGRES_DATABASE:monitor-sensors}
+  schema: ${POSTGRES_SCHEMA:sensors}
+  pool:
+    maxIdleTimeInMinutes: 5
+    maxSize: 30
