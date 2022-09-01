@@ -1,14 +1,19 @@
 server:
   port: 8080
   shutdown: graceful
+  servlet:
+    context-path: /monitor-sensors
 
-database:
-  host: ${POSTGRES_HOST:localhost}
-  port: ${POSTGRES_PORT:5432}
-  username: ${POSTGRES_USERNAME:user}
-  password: ${POSTGRES_PASSWORD:password}
-  database: ${POSTGRES_DATABASE:monitor-sensors}
-  schema: ${POSTGRES_SCHEMA:sensors}
-  pool:
-    maxIdleTimeInMinutes: 5
-    maxSize: 30
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://localhost:5432/monitor-sensors?stringtype=unspecified
+    username: user
+    password: password
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
