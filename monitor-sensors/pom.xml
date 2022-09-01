@@ -20,6 +20,12 @@
 
     <properties>
         <java.version>11</java.version>
+        <swagger2.version>2.6.1</swagger2.version>
+        <hibernate-core.version>5.2.10.Final</hibernate-core.version>
+        <hibernate-annotations.version>3.5.6-Final</hibernate-annotations.version>
+        <hibernate-search-orm.version>5.8.2.Final</hibernate-search-orm.version>
+        <jaxb-api.version>2.1</jaxb-api.version>
+        <xml.bind-api.version>2.3.3</xml.bind-api.version>
     </properties>
 
     <dependencies>
@@ -41,12 +47,12 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.6.1</version>
+            <version>${swagger2.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.6.1</version>
+            <version>${swagger2.version}</version>
         </dependency>
 
         <dependency>
@@ -65,36 +71,36 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.10.Final</version>
+            <version>${hibernate-core.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
-            <version>3.5.6-Final</version>
+            <version>${hibernate-annotations.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-search-orm</artifactId>
-            <version>5.8.2.Final</version>
+            <version>${hibernate-search-orm.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
-            <version>2.1</version>
+            <version>${jaxb-api.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>2.3.3</version>
+            <version>${xml.bind-api.version}</version>
         </dependency>
         <!-- JAXB RI, Jakarta XML Binding -->
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>2.3.3</version>
+            <version>${xml.bind-api.version}</version>
             <scope>runtime</scope>
         </dependency>
 
