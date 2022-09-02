@@ -54,7 +54,8 @@ public class SensorServiceImpl implements SensorService {
 
     @Override
     public SensorDto updateSensor(Long id, SensorDto sensorDto) {
-        Sensor sensor = sensorRepository.getById(id);
+        Sensor sensor = Optional.ofNullable(sensorRepository.getById(id))
+                .orElseThrow(() -> new SensorNotFoundException("Sensor not found"));
         sensorMapper.updateFromDto(sensor, sensorDto);
         Range range = sensor.getRange();
         range.setFrom(sensorDto.getRange().getFrom());

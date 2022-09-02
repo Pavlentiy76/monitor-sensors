@@ -44,9 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v3/api-docs",
                         "/swagger-resources/**",
                         "/swagger-ui.html").authenticated()
+                .antMatchers(HttpMethod.GET,"/sensors").hasRole("USER")
                 .antMatchers(HttpMethod.GET,"/sensors/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/sensors").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.GET,"/sensors/search/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.GET,"/sensors/search/**").hasRole("USER")
                 .antMatchers(HttpMethod.POST,"/sensors").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE,"/sensors/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT,"/sensors/**").hasRole("ADMIN")

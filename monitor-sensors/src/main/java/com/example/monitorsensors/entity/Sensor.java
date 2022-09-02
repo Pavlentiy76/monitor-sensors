@@ -5,6 +5,7 @@ import com.example.monitorsensors.db.enums.Unit;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.TermVector;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import java.util.Objects;
 @Entity
 @Indexed
 @Table(name = "sensors")
-public class Sensor implements Serializable {
+public class Sensor extends RepresentationModel<Sensor> implements Serializable {
 
     private static final long serialVersionUID = 445862574L;
 
