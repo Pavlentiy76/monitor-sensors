@@ -76,10 +76,18 @@ public class SensorRepositoryImpl implements SensorRepository {
 
             org.apache.lucene.search.Query wildcardQuery = queryBuilder
                     .keyword()
-//                    .wildcard()
-                    .onField("title")
-                    .matching(partOfNameOrModel)
+                    .wildcard()
+                    .onFields("title", "model")
+                    .matching("*" + partOfNameOrModel + "*")
                     .createQuery();
+
+//todo It should work
+
+//            SearchSession searchSession = org.hibernate.search.mapper.orm.Search.session(session);
+//
+//            List<Sensor> sensorList = searchSession.search(Sensor.class).where(f -> f.wildcard().fields("title", "model")
+//                    .matching("*" + partOfNameOrModel + "*"))
+//                    .fetchHits(20);
 
             Query hibQuery = fullTextSession.createFullTextQuery(wildcardQuery, Sensor.class);
 

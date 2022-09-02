@@ -2,9 +2,15 @@ package com.example.monitorsensors.entity;
 
 import com.example.monitorsensors.db.enums.Type;
 import com.example.monitorsensors.db.enums.Unit;
+import org.apache.lucene.analysis.core.KeywordTokenizerFactory;
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.AnalyzerDef;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.TermVector;
+import org.hibernate.search.annotations.TokenFilterDef;
+import org.hibernate.search.annotations.TokenizerDef;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.CascadeType;
@@ -23,8 +29,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Indexed
 @Table(name = "sensors")
+@Indexed
+@AnalyzerDef(name = "a",
+        tokenizer = @TokenizerDef(factory = KeywordTokenizerFactory.class),
+        filters = @TokenFilterDef(factory = LowerCaseFilterFactory.class)
+)
+@Analyzer(definition = "a")
 public class Sensor extends RepresentationModel<Sensor> implements Serializable {
 
     private static final long serialVersionUID = 445862574L;

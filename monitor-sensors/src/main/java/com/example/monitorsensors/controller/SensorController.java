@@ -56,7 +56,7 @@ public class SensorController {
     }
 
     @GetMapping()
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Operation(summary = "Get all sensors")
     @ApiResponse(responseCode = "200")
     public ResponseEntity<List<SensorDto>> getAllSensors() {
@@ -64,7 +64,7 @@ public class SensorController {
     }
 
     @GetMapping("/search/{partOfTitleOrModel}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Operation(summary = "Search sensors")
     @ApiResponse(responseCode = "200")
     public ResponseEntity<List<SensorDto>> searchSensors(@PathVariable("partOfTitleOrModel") String partOfTitleOrModel) {
