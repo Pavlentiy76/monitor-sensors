@@ -26,7 +26,7 @@ public class SensorRepositoryImpl implements SensorRepository {
     @Override
     public Sensor getById(Long id) {
         try (Session session = SensorsSessionFactory.getSession().openSession()) {
-            String hql = "from Sensor where id = :id";
+            String hql = "from Sensor s inner join fetch s.range where s.id = :id ";
             Query query = session.createQuery(hql);
             query.setParameter("id", id);
             return (Sensor) query.uniqueResult();
@@ -56,7 +56,7 @@ public class SensorRepositoryImpl implements SensorRepository {
     @Override
     public List<Sensor> getAllSensors() {
         try (Session session = SensorsSessionFactory.getSession().openSession()) {
-            String hql = "from Sensor ";
+            String hql = "from Sensor s inner join fetch s.range";
             Query query = session.createQuery(hql);
             return query.list();
         }
