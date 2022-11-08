@@ -3,3 +3,8 @@ server:
   shutdown: graceful
   servlet:
     context-path: /monitor-sensors
+
+spring:
+  sql:
+    init:
+      mode: always
