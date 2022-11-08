@@ -3,17 +3,3 @@ server:
   shutdown: graceful
   servlet:
     context-path: /monitor-sensors
-
-spring:
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: none
-  datasource:
-    url: jdbc:postgresql://localhost:5432/monitor-sensors?stringtype=unspecified
-    username: user
-    password: password
-    driverClassName: org.postgresql.Driver
-  sql:
-    init:
-      mode: always

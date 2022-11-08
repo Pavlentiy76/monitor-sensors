@@ -6,9 +6,6 @@ import com.example.monitorsensors.entity.Sensor;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.hibernate.search.FullTextSession;
-import org.hibernate.search.Search;
-import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,7 +23,7 @@ public class SensorRepositoryImpl implements SensorRepository {
     @Override
     public Sensor getById(Long id) {
         try (Session session = SensorsSessionFactory.getSession().openSession()) {
-            String hql = "from Sensor s inner join fetch s.range where s.id = :id ";
+            String hql = "from Sensor s join fetch s.range where s.id = :id ";
             Query query = session.createQuery(hql);
             query.setParameter("id", id);
             return (Sensor) query.uniqueResult();
@@ -56,7 +53,7 @@ public class SensorRepositoryImpl implements SensorRepository {
     @Override
     public List<Sensor> getAllSensors() {
         try (Session session = SensorsSessionFactory.getSession().openSession()) {
-            String hql = "from Sensor s inner join fetch s.range";
+            String hql = "from Sensor s join fetch s.range";
             Query query = session.createQuery(hql);
             return query.list();
         }
@@ -66,32 +63,10 @@ public class SensorRepositoryImpl implements SensorRepository {
     public List<Sensor> searchByPartOfTitleOrModel(String partOfNameOrModel) {
 
         try (Session session = SensorsSessionFactory.getSession().openSession()) {
-
-            FullTextSession fullTextSession = Search.getFullTextSession(session);
-
-            QueryBuilder queryBuilder = fullTextSession.getSearchFactory()
-                    .buildQueryBuilder()
-                    .forEntity(Sensor.class)
-                    .get();
-
-            org.apache.lucene.search.Query wildcardQuery = queryBuilder
-                    .keyword()
-                    .wildcard()
-                    .onFields("title", "model")
-                    .matching("*" + partOfNameOrModel + "*")
-                    .createQuery();
-
-//todo It should work
-
-//            SearchSession searchSession = org.hibernate.search.mapper.orm.Search.session(session);
-//
-//            List<Sensor> sensorList = searchSession.search(Sensor.class).where(f -> f.wildcard().fields("title", "model")
-//                    .matching("*" + partOfNameOrModel + "*"))
-//                    .fetchHits(20);
-
-            Query hibQuery = fullTextSession.createFullTextQuery(wildcardQuery, Sensor.class);
-
-            return hibQuery.getResultList();
+            String hql = "from Sensor s join fetch s.range where s.title like :partOfNameOrModel or s.model like :partOfNameOrModel";
+            Query query = session.createQuery(hql);
+            query.setParameter("partOfNameOrModel", "%" + partOfNameOrModel + "%");
+            return query.list();
         }
     }
 

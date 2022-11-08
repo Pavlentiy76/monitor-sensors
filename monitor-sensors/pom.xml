@@ -14,7 +14,7 @@
     <artifactId>monitor-sensors</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>monitor-sensors</name>
     <description>Demo project</description>
 
@@ -71,11 +71,6 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate-core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
-            <version>${hibernate-annotations.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

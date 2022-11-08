@@ -1,13 +1,29 @@
 version: "3"
 
 services:
+  monitor-sensors:
+    image: 'monitor-sensors:latest'
+    build:
+      context: .
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+    networks:
+      - inner-net
+
   postgres:
     image: postgres
-    container_name: postgresdb
+    container_name: postgres
     restart: always
+    networks:
+      - inner-net
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-user}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
       POSTGRES_DB: ${POSTGRES_DB:-monitor-sensors}
     ports:
       - 5432:5432
+
+networks:
+  inner-net:
